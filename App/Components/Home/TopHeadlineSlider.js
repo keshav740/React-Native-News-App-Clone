@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
-import GlobalApi from '../../Services/GlobalApi'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { useNavigation } from '@react-navigation/native'
 

@@ -1,9 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { Text, View , StyleSheet, ScrollView} from 'react-native'
-// import CategoryTextSlider from '../Components/Home/TopHeadlineSlider'
-// import TopHeadlineSlider from '../Components/Home/TopHeadlineSlider';
-// import GlobalApi from './Services/GlobalApi';
+import { Text, View , StyleSheet, ScrollView, ActivityIndicator, Dimensions} from 'react-native'
 import Color from '../Shared/Color';
 import { Ionicons } from '@expo/vector-icons';
 import HeadlineList from '../Components/Home/HeadlineList';
@@ -14,22 +11,25 @@ import CategoryTextSlider from '../Components/Home/CategoryTextSlider';
 const Home = () => {
 
   const [newsList , setNewsList] = useState([])
+  const [loading , setLoading] = useState(true)
   useEffect(()=>{
-      getTopHeadline();
+      // getTopHeadline();
     getNewsByCategory('latest');
   },[])
 
   const getNewsByCategory=async(category)=>{
-    const result = (await GlobalApi.getNewsByCategory(category)).data;
-    console.log(result)
+    setLoading(true);
+    const result = (await GlobalApi.getByCategory(category)).data;
+    // console.log(result)
     setNewsList(result.articles)
+    setLoading(false)
   }
 
 
-  const getTopHeadline = async () =>{
-      const result = (await GlobalApi.getTopHeadline).data;
-      setNewsList(result.articles)
-  }                     
+  // const getTopHeadline = async () =>{
+  //     const result = (await GlobalApi.getTopHeadline).data;
+  //     setNewsList(result.articles)
+  // }                     
 
   return (
     <ScrollView style={{backgroundColor:Color.white}}>
@@ -38,18 +38,20 @@ const Home = () => {
             <Ionicons name="notifications-outline" size={25} color="black" />
         </View>
 
-        {/* Category Text Slider */}
+        
 
         <CategoryTextSlider selectCategory={(category)=>getNewsByCategory(category)}/>
 
-        {/* Top TopHeadline Slider */}
+        {loading?<ActivityIndicator style={{marginTop:Dimensions.get('screen').height*0.40}} size={'large'} color={Color.primary} />:
+        <View>
 
         <TopHeadlineSlider newsList={newsList} />
         
-        {/* headline list */}
+        
 
         <HeadlineList newsList={newsList} />
-
+        </View>
+      }
     </ScrollView>
   )
 }
