@@ -16,7 +16,15 @@ const Home = () => {
   const [newsList , setNewsList] = useState([])
   useEffect(()=>{
       getTopHeadline();
+    getNewsByCategory('latest');
   },[])
+
+  const getNewsByCategory=async(category)=>{
+    const result = (await GlobalApi.getNewsByCategory(category)).data;
+    console.log(result)
+    setNewsList(result.articles)
+  }
+
 
   const getTopHeadline = async () =>{
       const result = (await GlobalApi.getTopHeadline).data;
@@ -24,15 +32,15 @@ const Home = () => {
   }                     
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:Color.white}}>
         <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-            <Text style={styles.appName}>App News Name</Text>
+            <Text style={styles.appName}>Mine News</Text>
             <Ionicons name="notifications-outline" size={25} color="black" />
         </View>
 
         {/* Category Text Slider */}
 
-        <CategoryTextSlider />
+        <CategoryTextSlider selectCategory={(category)=>getNewsByCategory(category)}/>
 
         {/* Top TopHeadline Slider */}
 
