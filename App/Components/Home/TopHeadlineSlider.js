@@ -21,7 +21,7 @@ const TopHeadlineSlider = ({newsList}) => {
                   style={{height:Dimensions.get('screen').width*0.77, borderRadius:10}}
             />
             <Text numberOfLines={3} style={{marginTop:10, fontSize:23,fontWeight:'800'}}>{item.title}</Text>
-            <Text style={{marginTop:5, color:Colors.primary}}>{item?.source?.name}</Text>
+            <Text style={{marginTop:5, color:'red'}}>{item?.source?.name}</Text>
           </TouchableOpacity>
         )}
       />

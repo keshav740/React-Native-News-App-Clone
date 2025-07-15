@@ -22,7 +22,7 @@ const HeadlineList = ({newsList}) => {
               />
               <View style={{marginRight:135, marginLeft:10}}>
                   <Text numberOfLines={4} style={{fontSize:18, fontWeight:'bold'}}>{item.title}</Text>
-                  <Text style={{color:Colors.primary, marginTop:6}}>{item?.source?.name}</Text>
+                  <Text style={{color:'red', marginTop:6}}>{item?.source?.name}</Text>
               </View>
             </TouchableOpacity>
           </View>

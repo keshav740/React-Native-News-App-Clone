@@ -14,6 +14,7 @@ const Home = () => {
   const [loading , setLoading] = useState(true)
   useEffect(()=>{
       // getTopHeadline();
+      
     getNewsByCategory('latest');
   },[])
 
@@ -37,26 +38,16 @@ const Home = () => {
             <Text style={styles.appName}>Mine News</Text>
             <Ionicons name="notifications-outline" size={25} color="black" />
         </View>
-
-        
-
         <CategoryTextSlider selectCategory={(category)=>getNewsByCategory(category)}/>
-
         {loading?<ActivityIndicator style={{marginTop:Dimensions.get('screen').height*0.40}} size={'large'} color={Color.primary} />:
         <View>
-
         <TopHeadlineSlider newsList={newsList} />
-        
-        
-
         <HeadlineList newsList={newsList} />
         </View>
       }
     </ScrollView>
   )
 }
-
-
 const styles = StyleSheet.create({
     appName: {
         fontSize:25,
